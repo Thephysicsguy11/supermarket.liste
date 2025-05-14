@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lista del Supermercado</title>
+  <title>Supermarket list</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-6">
   <div class="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
-    <h1 class="text-2xl font-bold mb-4">Lista del Supermercado</h1>
+    <h1 class="text-2xl font-bold mb-4">Supermarket list</h1>
 
     <div class="space-y-4">
       <div>
-        <label class="block text-sm font-medium">Nombre del producto:</label>
+        <label class="block text-sm font-medium">Product:</label>
         <input id="productName" type="text" class="w-full p-2 border rounded" />
       </div>
 
       <div>
-        <label class="block text-sm font-medium">Precio (coronas):</label>
+        <label class="block text-sm font-medium">Price (dk):</label>
         <input id="productPrice" type="number" class="w-full p-2 border rounded" />
       </div>
 
       <button onclick="mostrarProducto()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-        Ver conversión
+        See convertion
       </button>
     </div>
 
@@ -30,18 +30,18 @@
       <p class="mt-2 text-lg"><strong>Producto:</strong> <span id="previewNombre"></span></p>
       <p><strong>Precio:</strong> <span id="previewCoronas"></span> DKK / <span id="previewEuros"></span> €</p>
       <button onclick="confirmarProducto()" class="mt-2 bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
-        Confirmar y agregar
+        Confirm and add
       </button>
     </div>
 
     <hr class="my-6" />
 
-    <h2 class="text-xl font-semibold mb-2">Lista de productos:</h2>
+    <h2 class="text-xl font-semibold mb-2">Products list:</h2>
     <ul id="listaProductos" class="list-disc list-inside space-y-1"></ul>
 
     <div class="mt-4">
-      <p><strong>Total en coronas:</strong> <span id="totalCoronas">0</span> DKK</p>
-      <p><strong>Total en euros:</strong> <span id="totalEuros">0.00</span> €</p>
+      <p><strong>Total in Krones:</strong> <span id="totalCoronas">0</span> DKK</p>
+      <p><strong>Total in Euros:</strong> <span id="totalEuros">0.00</span> €</p>
     </div>
   </div>
 
