@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista del Supermercado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Lista del Supermercado</h1>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium">Nombre del producto:</label>
+        <input id="productName" type="text" class="w-full p-2 border rounded" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium">Precio (coronas):</label>
+        <input id="productPrice" type="number" class="w-full p-2 border rounded" />
+      </div>
+
+      <button onclick="mostrarProducto()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        Ver conversión
+      </button>
+    </div>
+
+    <div id="productoPreview" class="mt-4 hidden">
+      <p class="mt-2 text-lg"><strong>Producto:</strong> <span id="previewNombre"></span></p>
+      <p><strong>Precio:</strong> <span id="previewCoronas"></span> DKK / <span id="previewEuros"></span> €</p>
+      <button onclick="confirmarProducto()" class="mt-2 bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+        Confirmar y agregar
+      </button>
+    </div>
+
+    <hr class="my-6" />
+
+    <h2 class="text-xl font-semibold mb-2">Lista de productos:</h2>
+    <ul id="listaProductos" class="list-disc list-inside space-y-1"></ul>
+
+    <div class="mt-4">
+      <p><strong>Total en coronas:</strong> <span id="totalCoronas">0</span> DKK</p>
+      <p><strong>Total en euros:</strong> <span id="totalEuros">0.00</span> €</p>
+    </div>
+  </div>
+
+  <script>
+    const conversionRate = 7.46089;
+    let totalCoronas = 0;
+
+    function mostrarProducto() {
+      const nombre = document.getElementById('productName').value.trim();
+      const precio = parseFloat(document.getElementById('productPrice').value);
+
+      if (!nombre || isNaN(precio) || precio <= 0) {
+        alert('Por favor, introduce un nombre y un precio válido.');
+        return;
+      }
+
+      const euros = (precio / conversionRate).toFixed(2);
+
+      document.getElementById('previewNombre').textContent = nombre;
+      document.getElementById('previewCoronas').textContent = precio.toFixed(2);
+      document.getElementById('previewEuros').textContent = euros;
+      document.getElementById('productoPreview').classList.remove('hidden');
+    }
+
+    function confirmarProducto() {
+      const nombre = document.getElementById('previewNombre').textContent;
+      const coronas = parseFloat(document.getElementById('previewCoronas').textContent);
+      const euros = parseFloat(document.getElementById('previewEuros').textContent);
+
+      const item = `${nombre} – ${coronas.toFixed(2)} DKK / ${euros.toFixed(2)} €`;
+      const lista = document.getElementById('listaProductos');
+      const li = document.createElement('li');
+      li.textContent = item;
+      lista.appendChild(li);
+
+      totalCoronas += coronas;
+      const totalEuros = (totalCoronas / conversionRate).toFixed(2);
+
+      document.getElementById('totalCoronas').textContent = totalCoronas.toFixed(2);
+      document.getElementById('totalEuros').textContent = totalEuros;
+
+      // Reset inputs
+      document.getElementById('productName').value = '';
+      document.getElementById('productPrice').value = '';
+      document.getElementById('productoPreview').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
